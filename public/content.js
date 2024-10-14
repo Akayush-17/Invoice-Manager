@@ -86,6 +86,13 @@ function showInvoiceModal(invoice) {
   });
 }
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "toggle_sidebar") {
+    toggleSidebar();
+  } 
+});
+
+// This will be injected into the webpage
 window.addEventListener('message', function(event) {
   if (event.data.type === 'SHOW_INVOICE_MODAL') {
     const { invoice } = event.data;
@@ -93,5 +100,6 @@ window.addEventListener('message', function(event) {
   }
 });
 
+// Create the sidebar and modal root when the content script loads
 createSidebar();
 createModalRoot();
