@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Invoice Manager",
+  "description": "Manage expence at one place",
+  "version": "1.0",
+  "action": {
+    "default_title": "Invoice Manager"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "html2canvas.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "devtools_page": "index.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["index.html", "html2canvas.min.js", "Resume_New.pdf"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
